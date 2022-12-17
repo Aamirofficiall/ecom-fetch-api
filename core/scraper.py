@@ -18,8 +18,7 @@ def getShopsData():
 
 
     for i in df['Name']:
-        if counter == 2:
-            break
+
         print(counter)
         response = requests.get("https://www.etsy.com/shop/{}".format(i))
         tree = html.fromstring(response.content)
