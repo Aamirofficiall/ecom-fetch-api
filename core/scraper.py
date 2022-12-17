@@ -84,6 +84,8 @@ def getShopsData():
             counter+=1
         except:
             print('skipping timeout reustl')
+            counter+=1
+            
             continue
         context = {}
         context['message'] = result
