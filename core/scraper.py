@@ -10,13 +10,6 @@ import os
 def getShopsData():
         
     filename = os.path.realpath('competitor.xlsx')
-    print('*************************')
-    print('*************************')
-    print('*************************')
-    print(filename)
-    print('*************************')
-    print('*************************')
-    print('*************************')
     
     df = pd.read_excel(filename, sheet_name='Good competitors')
     counter = 0
@@ -25,6 +18,8 @@ def getShopsData():
 
 
     for i in df['Name']:
+        if counter == 2:
+            break
         print(counter)
         response = requests.get("https://www.etsy.com/shop/{}".format(i))
         tree = html.fromstring(response.content)
