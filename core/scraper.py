@@ -81,10 +81,10 @@ def getShopsData():
                 
                 
                  
-            # try:
-            r_data['sales'] = data_['data']['store_sales'] 
-            # except:
-            #     r_data['sales'] = sales
+            try:
+                r_data['sales'] = data_['data']['store_sales'] 
+            except:
+                r_data['sales'] = sales
                 
                 
             # store_reviews
