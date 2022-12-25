@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework import  permissions
 from .scraper import getShopsData
 from .models import *
-
+import pandas as pd
+import os
 
 
 
@@ -13,6 +14,13 @@ class get_api_data(APIView):
 
     def get(self, request, *args, **kwargs):
         # try:
+            filename = os.path.realpath('competitor.xlsx')
+            df = pd.read_excel(filename, sheet_name='Good competitors')
+
+            # for i in df['Store Link']:
+            #     print(i)
+            #     CompetitorLink.objects.get_or_create(link=i)
+                
             links = CompetitorLink.objects.filter()
             output = getShopsData(links)
             return Response(output)
