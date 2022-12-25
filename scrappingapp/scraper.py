@@ -22,7 +22,7 @@ def getShopsData(links):
             print(counter)
 
             try:
-                response = requests.get(link,timeout=3.5)
+                response = requests.get(link.link,timeout=3.5)
             except:
                 continue
             tree = html.fromstring(response.content)
@@ -49,7 +49,7 @@ def getShopsData(links):
             }
             url = "https://etsyhunt.com/ecommerce/chrome-plug/store-detail"
             data = {
-                "store_name": link.split('/')[-1]
+                "store_name": link.link.split('/')[-1]
             }
             try:
                 response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
@@ -109,12 +109,7 @@ def getShopsData(links):
             result.append(r_data)
             counter+=1
 
-            
-        # except:
-        #     print('skipping timeout reustl')
-        #     counter+=1
-            
-        #     continue
+
             context = {}
             context['message'] = result
 
