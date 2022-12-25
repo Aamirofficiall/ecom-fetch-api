@@ -21,8 +21,10 @@ def getShopsData():
         # try:
             print(counter)
 
-            
-            response = requests.get("https://www.etsy.com/shop/{}".format(i),timeout=3.5)
+            try:
+                response = requests.get("https://www.etsy.com/shop/{}".format(i),timeout=3.5)
+            except:
+                continue
             tree = html.fromstring(response.content)
             
             
@@ -49,7 +51,10 @@ def getShopsData():
             data = {
                 "store_name": i
             }
-            response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
+            try:
+                response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
+            except:
+                continue
             data_ = response.json()
             
             r_data = {}
