@@ -18,10 +18,11 @@ def getShopsData():
 
 
     for i in df['Name']:
-
-        try:
+        # try:
             print(counter)
-            response = requests.get("https://www.etsy.com/shop/{}".format(i),timeout=1.5)
+
+            
+            response = requests.get("https://www.etsy.com/shop/{}".format(i),timeout=3.5)
             tree = html.fromstring(response.content)
             
             
@@ -48,16 +49,14 @@ def getShopsData():
             data = {
                 "store_name": i
             }
-            response = requests.get( url=url, data=data, headers=headers,timeout=1.5)
+            response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
             data_ = response.json()
             
             r_data = {}
             r_data['store_name'] = store_name
             r_data['store_label'] = store_label
             r_data['location'] = location
-            r_data['sales'] = sales
             r_data['all_products'] = all_products
-            r_data['total_reviews'] = total_reviews
             
             try:
                 r_data['sales_7days'] = data_['data']['sales_7days']
@@ -78,17 +77,41 @@ def getShopsData():
             try:
                 r_data['rating'] = data_['data']['rating'] 
             except:
-                r_data['rating'] = "" 
+                r_data['rating'] = ""
+                
+                
+                 
+            try:
+                r_data['sales'] = data_['data']['sales'] 
+            except:
+                r_data['sales'] = sales
+                
+                
+            # store_reviews
+            try:
+                r_data['total_reviews'] = data_['data']['store_reviews'] 
+            except:
+                r_data['total_reviews'] = total_reviews
+
+            # category
+            try:
+                r_data['category'] = data_['data']['category'] 
+            except:
+                r_data['category'] = ""
+                
+                
                 
             result.append(r_data)
             counter+=1
-        except:
-            print('skipping timeout reustl')
-            counter+=1
+
             
-            continue
-        context = {}
-        context['message'] = result
+        # except:
+        #     print('skipping timeout reustl')
+        #     counter+=1
+            
+        #     continue
+            context = {}
+            context['message'] = result
 
     return context
 
