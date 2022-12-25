@@ -96,7 +96,7 @@ def getShopsData(links):
             # try:
             #     r_data['store_reviews'] = data_['data']['store_reviews'] 
             # except:
-            r_data['total_reviews'] =  ''.join(c for c in total_reviews if c.isdigit())
+            r_data['total_reviews'] = total_reviews 
 
             # category
             try:
