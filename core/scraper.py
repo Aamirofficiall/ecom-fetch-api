@@ -82,16 +82,16 @@ def getShopsData():
                 
                  
             # try:
-            r_data['sales'] = data_['data']['sales'] 
+            r_data['sales'] = data_['data']['store_sales'] 
             # except:
             #     r_data['sales'] = sales
                 
                 
             # store_reviews
-            # try:
-            #     r_data['total_reviews'] = data_['data']['store_reviews'] 
-            # except:
-            r_data['total_reviews'] = total_reviews
+            try:
+                r_data['store_reviews'] = data_['data']['store_reviews'] 
+            except:
+                r_data['total_reviews'] = total_reviews
 
             # category
             try:
