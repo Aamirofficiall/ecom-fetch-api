@@ -88,54 +88,53 @@ def getShopsData(links):
             r_data['all_products'] = all_products
             
             try:
-                r_data['sales_7days'] = data_['data']['sales_7days']
+                r_data['Sales 7 Days'] = data_['data']['sales_7days']
             except:
-                r_data['sales_7days'] = ""
+                r_data['Sales 7 Days'] = ""
                 
             try:
-                r_data['reviews_7days'] = data_['data']['reviews_7days']
+                r_data['Reviews 7 Days'] = data_['data']['reviews_7days']
             except:
-                r_data['reviews_7days'] = ""
+                r_data['Reviews 7 Days'] = ""
                 
             try:
-                r_data['favorites_7days'] = data_['data']['favorites_7days']
+                r_data['Fav 7 Days'] = data_['data']['favorites_7days']
             except:
-                r_data['favorites_7days'] = ""
+                r_data['Fav 7 Days'] = ""
                 
                 
             try:
-                r_data['rating'] = data_['data']['rating'] 
+                r_data['Rating'] = data_['data']['rating'] 
             except:
-                r_data['rating'] = ""
+                r_data['Rating'] = ""
                 
                 
                  
             try:
-                r_data['sales'] = data_['data']['store_sales'] 
+                r_data['Total Sales'] = data_['data']['store_sales'] 
             except:
-                r_data['sales'] = sales
+                r_data['Total Sales'] = sales
                 
                 
             # store_reviews
             # try:
             #     r_data['store_reviews'] = data_['data']['store_reviews'] 
             # except:
-            r_data['total_reviews'] = total_reviews 
+            r_data['Total Reviews'] = total_reviews 
 
             # category
             try:
-                r_data['category'] = data_['data']['category'] 
+                r_data['Category'] = data_['data']['category'] 
             except:
-                r_data['category'] = ""
+                r_data['Category'] = ""
                 
                 
                 
             result.append(r_data)
             counter+=1
 
-            context = {}
+            context = result
             
-            context['message'] = result
             
 
     return context
