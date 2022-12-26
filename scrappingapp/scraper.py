@@ -52,10 +52,10 @@ def getShopsData(links):
                 "store_name": link.link.split('/')[-1]
             }
             
-            response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
-        
+
             try:
                 response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
+                print(response.json())
             except:
                 continue
             data_ = response.json()
@@ -115,7 +115,6 @@ def getShopsData(links):
             context = {}
             
             context['message'] = result
-            print(context)
             
 
     return context
