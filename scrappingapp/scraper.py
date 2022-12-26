@@ -66,7 +66,9 @@ def getShopsData(links):
             }
             url = "https://etsyhunt.com/ecommerce/chrome-plug/store-detail"
             data = {
-                "store_name": link.link.split('/')[-1]
+                "store_name": link.link.split('/')[-1],
+                "has_login": "0",
+                "validate": "0"
             }
             
 
