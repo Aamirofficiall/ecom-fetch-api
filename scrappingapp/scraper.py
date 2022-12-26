@@ -69,8 +69,8 @@ def getShopsData(links):
             print('---------------------------')
             data = {
                 "store_name": link.link.split('/')[-1],
-                "has_login": "0",
-                "validate": "0"
+                "has_login": "1",
+                "validate": "0613aDyAdVPz2ZVjv063WVfr0vQOj7RM4CvME4qZcCq3gmps"
             }
             
 
