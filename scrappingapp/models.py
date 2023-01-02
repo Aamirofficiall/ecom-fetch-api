@@ -8,6 +8,7 @@ class CompetitorLink(models.Model):
     
     def __str__(self):
         return str(self.name)
+    
     def save(self, *args, **kwargs):
         
         s = self.link
