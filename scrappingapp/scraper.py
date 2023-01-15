@@ -6,7 +6,7 @@ from lxml import html
 import pandas as pd
 import os
 import re
-token___ = """eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYW4iOiJlbiIsInZlciI6InNtYiIsInRpbWVzdGFtcCI6MTY3Mjg2MzEwMiwiZXhwaXJlIjoxNjczMTIyMzAyLCJ1c2VyX2lkIjoiUzFKblJsaFVhZz09IiwiYXBwbmFtZSI6IkV0c3lIdW50Iiwic3Vic2NyaXB0aW9uIjp7ImlkIjoiMTgyMjcxIiwicGxhbl9pZCI6IjI1MSIsInBsYW5fcHJpY2VfaWQiOiIyNjkiLCJ1c2VyX2lkIjoiMTQ4MzEwNSIsImNoYW5uZWwiOiIwIiwiY2hhbm5lbF9jdXN0X2lkIjoiY3VzX01idmJpY3RKd2hXWVA3IiwiY2hhbm5lbF9zdWJzY3JpcHRpb25fb3Jfb3JkZXJfaWQiOiJzdWJfMUxzaGttSmMxSWFobTJFOVdBZ3U4dGlnIiwiY2hhbm5lbF9zdGF0dXMiOiJhY3RpdmUiLCJjaGFubmVsX2xhc3RfcGF5bWVudF9kYXRlIjoiMCIsImNoYW5uZWxfbGFzdF9wYXltZW50X2Ftb3VudCI6IjAiLCJjaGFubmVsX3N0YXJ0X2F0IjoiMTY3MTAwMDc0MCIsImNoYW5uZWxfY2FuY2VsZWRfYXQiOiIwIiwiY2hhbm5lbF9lbmRfYXQiOiIwIiwicGVyaW9kX3N0YXJ0IjoiMTY2NTczMDM0MCIsInBlcmlvZF9lbmQiOiIxNjczNjc5MTQwIiwicGVyaW9kX2RlbGF5IjoiMCIsImlzX3RyaWFsIjoiMCIsInNjYWxhIjpudWxsLCJsYXN0X3N5bmMiOiIxNjcyODQ5NzM1IiwiY3JlYXRlZF9hdCI6IjIwMjItMTAtMTMgMjM6NTI6MTkiLCJsYXN0X21vZGlmaWVkIjoiMjAyMy0wMS0wNCAwODoyODo1NSIsImNhbmNlbGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsImVuZGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsInN0YXR1cyI6IjEiLCJjb3VudHJ5X2NvZGUiOiIwIiwicGF5X3R5cGUiOiIwIiwicHJlX3N1YnNjcmlwdGlvbl9pZCI6IjAiLCJjb2RlIjoiZXRzeV9wbGFuXzNfbW9udGhfMTlfOTkiLCJwbGFuX25hbWUiOiJFdHN5SHVudCBQcm8iLCJpc19yZWN1cmx5IjoiMSIsInByaWNlIjoiMTkuOTkiLCJkZWZhdWx0X3BsYW4iOiJldHN5X3BsYW5fMF9tb250aF8wIiwicGxhbl90eXBlIjoiUHJvIiwicGxhbl9wcmljZSI6eyJpZCI6IjI2OSIsInBsYW5faWQiOiIyNTEiLCJuYW1lIjoiRVRTWS1Qcm8tMTkuOTlVU0QtTW9udGgiLCJ0aXRsZSI6IiIsImNvZGUiOiJldHN5X3BsYW5fM19tb250aF8xOV85OSIsInByaWNlIjoiMTkuOTkiLCJjdXJyZW5jeV90eXBlIjoiMCIsImludGVydmFsIjoiMiIsImludGVydmFsX2NvdW50IjoiMSIsInN0YXR1cyI6IjEiLCJwYXJlbnRfaWQiOiIwIiwiaXNfcmVjdXJseSI6IjEiLCJ0aGVtZV9pbmZvIjoie1widHJpYWxfZGF5c1wiOlwiMVwiLFwidHJpYWxfYW1vdW50XCI6XCIxXCIsXCJjbnlfdHJpYWxfYW1vdW50XCI6XCI2LjVcIixcImJ0bl9ldmVudF90eXBlXCI6XCIxXCIsXCJjb250ZW50X2xpc3RfY29sb3JcIjpcIiNmMTcwM2ZcIixcInByaWNlX3RleHRcIjpcIjE5Ljk5XCIsXCJwcmljZV90ZXh0XzFcIjpcIjE5Ljk5XCIsXCJ0aW1lX3RleHRcIjpcIlxcdTY3MDhcIixcInRpbWVfdGV4dF8xXCI6XCJtb1wiLFwiZGVmYXVsdF9pY29uXCI6XCJlbC1pY29uLXN1Y2Nlc3NcIixcImNvbnRlbnRfbGlzdFwiOlwiXFx1OTAwOVxcdTU0YzFcXHU2NDFjXFx1N2QyMlxcdWZmMWFcXHU0ZTBkXFx1OTY1MFxcblxcdTU1NDZcXHU1NGMxXFx1NTNjYVxcdTVlOTdcXHU5NGZhXFx1Njk5Y1xcdTUzNTVcXHVmZjFhXFx1NTE2OFxcdTkwZThcXHU1YzU1XFx1NzkzYVxcblxcdTVlOTdcXHU5NGZhXFx1NjQxY1xcdTdkMjJcXHVmZjFhXFx1NGUwZFxcdTk2NTBcXG5cXHU1ZTk3XFx1OTRmYVxcdTUyMDZcXHU2NzkwXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTE3M1xcdTk1MmVcXHU4YmNkXFx1NTIwNlxcdTY3OTBcXHVmZjFhXFx1NmJjZlxcdTY1ZTUyMDBcXHU2YjIxXFxuXFx1NjUzNlxcdTg1Y2ZcXHU1MjlmXFx1ODBmZFxcdWZmMWFcXHU2NzAwXFx1NTkxYTI1MDBcXHU0ZTJhXFxuTGlzdGluZ1xcdTRmMThcXHU1MzE2XFx1ZmYxYVxcdTZiY2ZcXHU1OTI5MTAwXFx1NmIyMVxcblxcdTdkMjJcXHU4YmM0XFx1NTI5ZlxcdTgwZmRcXHVmZjFhXFx1NmJjZlxcdTY1ZTU1MDBcXHU2YjIxXFxuXFx1NGU5YVxcdTlhNmNcXHU5MDBhXFx1NjI0YlxcdTVkZTVcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NGUwYlxcdTY3YjZcXHU1NTQ2XFx1NTRjMVxcdTkwMDlcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTkxYVxcdTVlOTdcXHU5NGZhXFx1N2VkMVxcdTViOWFcXHVmZjFhMTBcXHU0ZTJhXFx1NWU5N1xcdTk0ZmFcIixcImNvbnRlbnRfbGlzdF8xXCI6XCJQcm9kdWN0IFNlYXJjaDogVW5saW1pdGVkXFxuUHJvZHVjdCBDaGFydDogVW5saW1pdGVkXFxuU2hvcCBTZWFyY2g6IFVubGltaXRlZFxcblNob3AgQW5hbHlzaXM6IFVubGltaXRlZFxcblNob3AgQ2hhcnQ6IFVubGltaXRlZFxcbktleXdvcmQgU2VhcmNoOiAyMDAgRGFpbHlcXG5GYXZvcml0ZXM6IFVwIHRvIDI1MDBcXG5MaXN0aW5nT3B0aW1pemU6IDEwMCBEYWlseVxcbkZvbGxvd3VwUmVtaW5kOiA1MDAgRGFpbHlcXG5BbWF6b24gSGFuZG1hZGU6IFVubGltaXRlZFxcbkluYWN0aXZlIFByb2R1Y3RzOiBVbmxpbWl0ZWRcXG5NdWx0aS1TdG9yZSBCaW5kaW5nOiAxMCBzaG9wc1wiLFwicGxhbl9jdXN0b21fc3R5bGVcIjp7XCJhY3RpdmVcIjpcImZhbHNlXCIsXCJub3JtYWxfYnRuX3RleHRfY29sb3JcIjpcIiNGRkZcIixcIm5vcm1hbF9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcIm5vcm1hbF9ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIixcImhvdmVyX2J0bl90ZXh0X2NvbG9yXCI6XCIjRkZGXCIsXCJob3Zlcl9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcImhvdmVyX2JvcmRlcl9jb2xvclwiOlwiI2ViZWJlYlwiLFwiaG92ZXJfc2NhbGVcIjpcIjEwXCIsXCJ1c2luZ19idG5fdGV4dF9jb2xvclwiOlwiI0ZGRlwiLFwidXNpbmdfYnRuX2JnX2NvbG9yXCI6XCIjZjE3MDNmXCIsXCJ1c2luZ19ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIn0sXCJ0aGVtZV9zdHlsZVwiOlwiMVwiLFwiY29udGVudF9saXN0X3N0eWxlXCI6XCIyXCIsXCJkZWZhdWx0X2ljb25fY29sb3JcIjpcIiNmMTcwM2ZcIixcInllYXJfc2F2ZV9wcmljZVwiOlwiXCIsXCJpc190cmlhbFwiOjAsXCJ0aXRsZV8xXCI6XCJQcm9cIixcInByaWNlXCI6XCIxOS45OVwiLFwic3ViX3RpdGxlXzFcIjpcIkFkdmFuY2VkIHNlbGVjdGlvblxcbkhlbHBpbmcgbXVsdGktc3RvcmUgc2VsbGVyXFxuXCIsXCJzdWJfdGl0bGVcIjpcIlxcdTU5MWFcXHU1ZTk3XFx1OTRmYVxcXC9cXHU5NGZhXFx1OGQyN1xcdTUzNTZcXHU1YmI2XFx1NWZjNVxcdTkwMDlcXG5cXHU5YWQ4XFx1OTYzNlxcdTkwMDlcXHU1NGMxXFx1NTI5ZlxcdTgwZmRcXHU1MmE5XFx1NjBhOFxcdTU5MjdcXHU1MzU2XCIsXCJ0aXRsZVwiOlwiUHJvXCIsXCJidG5fbmFtZVwiOlwiXFx1N2FjYlxcdTUzNzNcXHU4YmEyXFx1OTYwNVwiLFwiYnRuX25hbWVfMVwiOlwiR0VUXCIsXCJwcmljZV9kZXNcIjpcIlwifSIsImxldmVsIjoiMCIsImlzX2RlZmF1bHRfcGxhbiI6IjAiLCJ0eXBlIjoiMCIsImlzX2RlbGV0ZWQiOiIwIiwiY3JlYXRlZF9hdCI6IjIwMjItMDQtMjggMDE6MTc6NTEiLCJ1cGRhdGVkX2F0IjoiMjAyMi0wOS0yOSAwNzoyMzowOCJ9fX0.2YRPJMiqLKjHpZIZw-9RXXGb0bZy8qwq1zlU6QGvj2Y"""
+token___ =   """eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYW4iOiJlbiIsInZlciI6InNtYiIsInRpbWVzdGFtcCI6MTY3MzgxMzE3NSwiZXhwaXJlIjoxNjc0MDcyMzc1LCJ1c2VyX2lkIjoiUzFKblJsaFVhZz09IiwiYXBwbmFtZSI6IkV0c3lIdW50Iiwic3Vic2NyaXB0aW9uIjp7ImlkIjoiMTgyMjcxIiwicGxhbl9pZCI6IjI1MSIsInBsYW5fcHJpY2VfaWQiOiIyNjkiLCJ1c2VyX2lkIjoiMTQ4MzEwNSIsImNoYW5uZWwiOiIwIiwiY2hhbm5lbF9jdXN0X2lkIjoiY3VzX01idmJpY3RKd2hXWVA3IiwiY2hhbm5lbF9zdWJzY3JpcHRpb25fb3Jfb3JkZXJfaWQiOiJzdWJfMUxzaGttSmMxSWFobTJFOVdBZ3U4dGlnIiwiY2hhbm5lbF9zdGF0dXMiOiJhY3RpdmUiLCJjaGFubmVsX2xhc3RfcGF5bWVudF9kYXRlIjoiMCIsImNoYW5uZWxfbGFzdF9wYXltZW50X2Ftb3VudCI6IjAiLCJjaGFubmVsX3N0YXJ0X2F0IjoiMTY3MzY3OTE0MCIsImNoYW5uZWxfY2FuY2VsZWRfYXQiOiIwIiwiY2hhbm5lbF9lbmRfYXQiOiIwIiwicGVyaW9kX3N0YXJ0IjoiMTY2NTczMDM0MCIsInBlcmlvZF9lbmQiOiIxNjc2MzU3NTQwIiwicGVyaW9kX2RlbGF5IjoiMCIsImlzX3RyaWFsIjoiMCIsInNjYWxhIjpudWxsLCJsYXN0X3N5bmMiOiIxNjczNzk5OTQyIiwiY3JlYXRlZF9hdCI6IjIwMjItMTAtMTMgMjM6NTI6MTkiLCJsYXN0X21vZGlmaWVkIjoiMjAyMy0wMS0xNSAwODoyNTo0MiIsImNhbmNlbGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsImVuZGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsInN0YXR1cyI6IjEiLCJjb3VudHJ5X2NvZGUiOiIwIiwicGF5X3R5cGUiOiIwIiwicHJlX3N1YnNjcmlwdGlvbl9pZCI6IjAiLCJjb2RlIjoiZXRzeV9wbGFuXzNfbW9udGhfMTlfOTkiLCJwbGFuX25hbWUiOiJFdHN5SHVudCBQcm8iLCJpc19yZWN1cmx5IjoiMSIsInByaWNlIjoiMTkuOTkiLCJkZWZhdWx0X3BsYW4iOiJldHN5X3BsYW5fMF9tb250aF8wIiwicGxhbl90eXBlIjoiUHJvIiwicGxhbl9wcmljZSI6eyJpZCI6IjI2OSIsInBsYW5faWQiOiIyNTEiLCJuYW1lIjoiRVRTWS1Qcm8tMTkuOTlVU0QtTW9udGgiLCJ0aXRsZSI6IiIsImNvZGUiOiJldHN5X3BsYW5fM19tb250aF8xOV85OSIsInByaWNlIjoiMTkuOTkiLCJjdXJyZW5jeV90eXBlIjoiMCIsImludGVydmFsIjoiMiIsImludGVydmFsX2NvdW50IjoiMSIsInN0YXR1cyI6IjEiLCJwYXJlbnRfaWQiOiIwIiwiaXNfcmVjdXJseSI6IjEiLCJ0aGVtZV9pbmZvIjoie1widHJpYWxfZGF5c1wiOlwiMVwiLFwidHJpYWxfYW1vdW50XCI6XCIxXCIsXCJjbnlfdHJpYWxfYW1vdW50XCI6XCI2LjVcIixcImJ0bl9ldmVudF90eXBlXCI6XCIxXCIsXCJjb250ZW50X2xpc3RfY29sb3JcIjpcIiNmMTcwM2ZcIixcInByaWNlX3RleHRcIjpcIjE5Ljk5XCIsXCJwcmljZV90ZXh0XzFcIjpcIjE5Ljk5XCIsXCJ0aW1lX3RleHRcIjpcIlxcdTY3MDhcIixcInRpbWVfdGV4dF8xXCI6XCJtb1wiLFwiZGVmYXVsdF9pY29uXCI6XCJlbC1pY29uLXN1Y2Nlc3NcIixcImNvbnRlbnRfbGlzdFwiOlwiXFx1OTAwOVxcdTU0YzFcXHU2NDFjXFx1N2QyMlxcdWZmMWFcXHU0ZTBkXFx1OTY1MFxcblxcdTU1NDZcXHU1NGMxXFx1NTNjYVxcdTVlOTdcXHU5NGZhXFx1Njk5Y1xcdTUzNTVcXHVmZjFhXFx1NTE2OFxcdTkwZThcXHU1YzU1XFx1NzkzYVxcblxcdTVlOTdcXHU5NGZhXFx1NjQxY1xcdTdkMjJcXHVmZjFhXFx1NGUwZFxcdTk2NTBcXG5cXHU1ZTk3XFx1OTRmYVxcdTUyMDZcXHU2NzkwXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTE3M1xcdTk1MmVcXHU4YmNkXFx1NTIwNlxcdTY3OTBcXHVmZjFhXFx1NmJjZlxcdTY1ZTUyMDBcXHU2YjIxXFxuXFx1NjUzNlxcdTg1Y2ZcXHU1MjlmXFx1ODBmZFxcdWZmMWFcXHU2NzAwXFx1NTkxYTI1MDBcXHU0ZTJhXFxuTGlzdGluZ1xcdTRmMThcXHU1MzE2XFx1ZmYxYVxcdTZiY2ZcXHU1OTI5MTAwXFx1NmIyMVxcblxcdTdkMjJcXHU4YmM0XFx1NTI5ZlxcdTgwZmRcXHVmZjFhXFx1NmJjZlxcdTY1ZTU1MDBcXHU2YjIxXFxuXFx1NGU5YVxcdTlhNmNcXHU5MDBhXFx1NjI0YlxcdTVkZTVcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NGUwYlxcdTY3YjZcXHU1NTQ2XFx1NTRjMVxcdTkwMDlcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTkxYVxcdTVlOTdcXHU5NGZhXFx1N2VkMVxcdTViOWFcXHVmZjFhMTBcXHU0ZTJhXFx1NWU5N1xcdTk0ZmFcIixcImNvbnRlbnRfbGlzdF8xXCI6XCJQcm9kdWN0IFNlYXJjaDogVW5saW1pdGVkXFxuUHJvZHVjdCBDaGFydDogVW5saW1pdGVkXFxuU2hvcCBTZWFyY2g6IFVubGltaXRlZFxcblNob3AgQW5hbHlzaXM6IFVubGltaXRlZFxcblNob3AgQ2hhcnQ6IFVubGltaXRlZFxcbktleXdvcmQgU2VhcmNoOiAyMDAgRGFpbHlcXG5GYXZvcml0ZXM6IFVwIHRvIDI1MDBcXG5MaXN0aW5nT3B0aW1pemU6IDEwMCBEYWlseVxcbkZvbGxvd3VwUmVtaW5kOiA1MDAgRGFpbHlcXG5BbWF6b24gSGFuZG1hZGU6IFVubGltaXRlZFxcbkluYWN0aXZlIFByb2R1Y3RzOiBVbmxpbWl0ZWRcXG5NdWx0aS1TdG9yZSBCaW5kaW5nOiAxMCBzaG9wc1wiLFwicGxhbl9jdXN0b21fc3R5bGVcIjp7XCJhY3RpdmVcIjpcImZhbHNlXCIsXCJub3JtYWxfYnRuX3RleHRfY29sb3JcIjpcIiNGRkZcIixcIm5vcm1hbF9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcIm5vcm1hbF9ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIixcImhvdmVyX2J0bl90ZXh0X2NvbG9yXCI6XCIjRkZGXCIsXCJob3Zlcl9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcImhvdmVyX2JvcmRlcl9jb2xvclwiOlwiI2ViZWJlYlwiLFwiaG92ZXJfc2NhbGVcIjpcIjEwXCIsXCJ1c2luZ19idG5fdGV4dF9jb2xvclwiOlwiI0ZGRlwiLFwidXNpbmdfYnRuX2JnX2NvbG9yXCI6XCIjZjE3MDNmXCIsXCJ1c2luZ19ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIn0sXCJ0aGVtZV9zdHlsZVwiOlwiMVwiLFwiY29udGVudF9saXN0X3N0eWxlXCI6XCIyXCIsXCJkZWZhdWx0X2ljb25fY29sb3JcIjpcIiNmMTcwM2ZcIixcInllYXJfc2F2ZV9wcmljZVwiOlwiXCIsXCJpc190cmlhbFwiOjAsXCJ0aXRsZV8xXCI6XCJQcm9cIixcInByaWNlXCI6XCIxOS45OVwiLFwic3ViX3RpdGxlXzFcIjpcIkFkdmFuY2VkIHNlbGVjdGlvblxcbkhlbHBpbmcgbXVsdGktc3RvcmUgc2VsbGVyXFxuXCIsXCJzdWJfdGl0bGVcIjpcIlxcdTU5MWFcXHU1ZTk3XFx1OTRmYVxcXC9cXHU5NGZhXFx1OGQyN1xcdTUzNTZcXHU1YmI2XFx1NWZjNVxcdTkwMDlcXG5cXHU5YWQ4XFx1OTYzNlxcdTkwMDlcXHU1NGMxXFx1NTI5ZlxcdTgwZmRcXHU1MmE5XFx1NjBhOFxcdTU5MjdcXHU1MzU2XCIsXCJ0aXRsZVwiOlwiUHJvXCIsXCJidG5fbmFtZVwiOlwiXFx1N2FjYlxcdTUzNzNcXHU4YmEyXFx1OTYwNVwiLFwiYnRuX25hbWVfMVwiOlwiR0VUXCIsXCJwcmljZV9kZXNcIjpcIlwifSIsImxldmVsIjoiMCIsImlzX2RlZmF1bHRfcGxhbiI6IjAiLCJ0eXBlIjoiMCIsImlzX2RlbGV0ZWQiOiIwIiwiY3JlYXRlZF9hdCI6IjIwMjItMDQtMjggMDE6MTc6NTEiLCJ1cGRhdGVkX2F0IjoiMjAyMi0wOS0yOSAwNzoyMzowOCJ9fX0.Bd7L2buU_4_UfcTM-WAeuiRmLLKq9YWgNg2rxYFHxkY"""
 
 
 def Round(value):
@@ -82,8 +82,6 @@ def getShopsData(links):
             
             
             url = "https://etsyhunt.com/ecommerce/chrome-plug/store-detail"
-            print(link.link.split('/')[-1])
-            print('---------------------------')
             data = {
                 "store_name": link.link.split('/')[-1],
                 "has_login": "1",
@@ -93,7 +91,6 @@ def getShopsData(links):
 
             try:
                 response = requests.get( url=url, data=data, headers=headers,timeout=3.5)
-                print(response.json())
             except:
                 continue
             data_ = response.json()
@@ -133,18 +130,8 @@ def getShopsData(links):
                 r_data['Total Sales'] = sales
                 
                 
-            # store_reviews
-            # try:
-            #     r_data['store_reviews'] = data_['data']['store_reviews'] 
-            # except:
             r_data['Total Reviews'] = total_reviews 
 
-            # # category
-            # try:
-            #     r_data['Category'] = data_['data']['category'] 
-            # except:
-            #     r_data['Category'] = ""
-                
             # Getting data from etsy hunt official website
             store_name_ = link.link.split('/')[-1]
             url_ = "https://etsyhunt.com/ecommerce/store/v1_0/basic-info?store_name={}".format(store_name_)
@@ -156,11 +143,10 @@ def getShopsData(links):
             
             
             response_ = requests.request("GET", url_, headers=headers_, params=querystring_)
-            # print('-----------------------------------------')
-            # print('first call')
-            # print(response_.json())
-            
+
             product_analysis = response_.json()['data']['product_analysis']['product_list']
+
+
             data = {}
             price_list = []
         
@@ -171,18 +157,34 @@ def getShopsData(links):
 
             # pricing
             
-            r_data['Max Price'] = Round(max(price_list))
-            r_data['Average Price'] = Round(Average(price_list))
-            r_data['Average Price'] = Round(Average(price_list))
+            r_data['Max Price'] =  Round(max(price_list)) 
+            r_data['Average Price'] =  Round(Average(price_list))
+            r_data['Average Price'] =  Round(Average(price_list))
             
 
 
             # shipping
-            r_data['Max Shipped Time'] = (response_.json()['data']['product_analysis']['shipped_distribute']['max_shipped'])
-            r_data['Min Shipped Time'] = (response_.json()['data']['product_analysis']['shipped_distribute']['min_shipped'])
-            r_data['Average Shipped Time'] = (response_.json()['data']['product_analysis']['shipped_distribute']['processing_time'])
-            category_list = (response_.json()['data']['product_analysis']['category_list'])
-            r_data['Category List'] = category_list[0]['name']
+            try:
+                r_data['Max Shipped Time'] = (response_.json()['data']['product_analysis']['shipped_distribute']['max_shipped'])
+            except:
+                r_data['Max Shipped Time'] = 0
+            
+            try:       
+                r_data['Min Shipped Time'] = (response_.json()['data']['product_analysis']['shipped_distribute']['min_shipped'])
+            except:
+                r_data['Min Shipped Time'] = 0
+                
+            try:
+                category_list = (response_.json()['data']['product_analysis']['category_list'])
+            except:
+                category_list = {}
+            category_counter = 1
+            
+            for cat in category_list:
+                rest = ", ".join(cat['name'])
+                rest +=" -> "+str(cat['value'])
+                r_data['Category {}'.format(category_counter)] = rest
+                category_counter +=1
 
             r_data['Created At']   =(response_.json()['data']['basic_info']['created_at'])
             r_data['Sales Month']  =(response_.json()['data']['basic_info']['sales_month'])
@@ -198,54 +200,3 @@ def getShopsData(links):
 
 
 
-def getShopsDataFromEtsyHunt(links):
-    
-        token = token___
-        result = []
-        
-        for link in links:
-
-            store_name = link.link.split('/')[-1]
-            url = "https://etsyhunt.com/ecommerce/store/v1_0/basic-info?store_name={}".format(store_name)
-
-            headers = {
-                "authorization": token
-            }
-            querystring = {"store_name":"RedKapokflowers"}
-            response = requests.request("GET", url, headers=headers, params=querystring)
-            print(response.json())
-            
-            product_analysis = response.json()['data']['product_analysis']['product_list']
-            data = {}
-            price_list = []
-            print(link.link.split('/')[-1])
-            print('---------------------------')            
-            
-            for i in product_analysis:
-                price_list.append(float(i['price']))
-
-
-            # pricing
-            
-            s = re.sub(r"(?<=\w)([A-Z])", r" \1",store_name)
-            store_name_ = s.split('/')[-1]
-            data['Store Name'] = store_name_
-            data['Max Price'] = Round(max(price_list))
-            data['Average Price'] = Round(Average(price_list))
-            data['Average Price'] = Round(Average(price_list))
-            
-
-
-            # shipping
-            data['Max Shipped Time'] = (response.json()['data']['product_analysis']['shipped_distribute']['max_shipped'])
-            data['Min Shipped Time'] = (response.json()['data']['product_analysis']['shipped_distribute']['min_shipped'])
-            data['Average Shipped Time'] = (response.json()['data']['product_analysis']['shipped_distribute']['processing_time'])
-            category_list = (response.json()['data']['product_analysis']['category_list'])
-            data['Category List'] = category_list[0]['name']
-
-            data['Created At']   =(response.json()['data']['basic_info']['created_at'])
-            data['Sales Month']  =(response.json()['data']['basic_info']['sales_month'])
-
-            result.append(data)
-            
-        return result
