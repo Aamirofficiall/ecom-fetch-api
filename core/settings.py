@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d+oyy7%*ot_5xl!%_5m*8#+7(=m+#6q45+!i4nk-zy29!c^fzu
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['54.87.27.76',"127.0.0.1"]
+ALLOWED_HOSTS = ['54.87.27.76',"127.0.0.1",'18.234.45.196']
 STATIC_ROOT = '/var/www/mysite/assets/'
 # Application definition
 
