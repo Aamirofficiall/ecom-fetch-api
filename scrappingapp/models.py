@@ -16,3 +16,4 @@ class CompetitorLink(models.Model):
         self.name = s.split('/')[-1]
         
         super().save(*args, **kwargs)
+
