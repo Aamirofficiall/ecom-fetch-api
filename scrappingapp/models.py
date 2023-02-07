@@ -17,3 +17,8 @@ class CompetitorLink(models.Model):
         
         super().save(*args, **kwargs)
 
+
+class ProductsLink(models.Model):
+    link  = models.CharField(max_length=500)
+    
+

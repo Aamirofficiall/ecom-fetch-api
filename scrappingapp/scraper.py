@@ -200,3 +200,84 @@ def getShopsData(links):
 
 
 
+def getProductData(links):
+        
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYW4iOiJlbiIsInZlciI6InNtYiIsInRpbWVzdGFtcCI6MTY3NTc5MjY4MiwiZXhwaXJlIjoxNjc2MDUxODgyLCJ1c2VyX2lkIjoiUzFKblJsaFVhZz09IiwiYXBwbmFtZSI6IkV0c3lIdW50Iiwic3Vic2NyaXB0aW9uIjp7ImlkIjoiMTgyMjcxIiwicGxhbl9pZCI6IjI1MSIsInBsYW5fcHJpY2VfaWQiOiIyNjkiLCJ1c2VyX2lkIjoiMTQ4MzEwNSIsImNoYW5uZWwiOiIwIiwiY2hhbm5lbF9jdXN0X2lkIjoiY3VzX01idmJpY3RKd2hXWVA3IiwiY2hhbm5lbF9zdWJzY3JpcHRpb25fb3Jfb3JkZXJfaWQiOiJzdWJfMUxzaGttSmMxSWFobTJFOVdBZ3U4dGlnIiwiY2hhbm5lbF9zdGF0dXMiOiJhY3RpdmUiLCJjaGFubmVsX2xhc3RfcGF5bWVudF9kYXRlIjoiMCIsImNoYW5uZWxfbGFzdF9wYXltZW50X2Ftb3VudCI6IjAiLCJjaGFubmVsX3N0YXJ0X2F0IjoiMTY3MzY3OTE0MCIsImNoYW5uZWxfY2FuY2VsZWRfYXQiOiIwIiwiY2hhbm5lbF9lbmRfYXQiOiIwIiwicGVyaW9kX3N0YXJ0IjoiMTY2NTczMDM0MCIsInBlcmlvZF9lbmQiOiIxNjc2MzU3NTQwIiwicGVyaW9kX2RlbGF5IjoiMCIsImlzX3RyaWFsIjoiMCIsInNjYWxhIjpudWxsLCJsYXN0X3N5bmMiOiIxNjc1Nzg3MzE2IiwiY3JlYXRlZF9hdCI6IjIwMjItMTAtMTMgMjM6NTI6MTkiLCJsYXN0X21vZGlmaWVkIjoiMjAyMy0wMi0wNyAwODoyODozNiIsImNhbmNlbGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsImVuZGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsInN0YXR1cyI6IjEiLCJjb3VudHJ5X2NvZGUiOiIwIiwicGF5X3R5cGUiOiIwIiwicHJlX3N1YnNjcmlwdGlvbl9pZCI6IjAiLCJjb2RlIjoiZXRzeV9wbGFuXzNfbW9udGhfMTlfOTkiLCJwbGFuX25hbWUiOiJFdHN5SHVudCBQcm8iLCJpc19yZWN1cmx5IjoiMSIsInByaWNlIjoiMTkuOTkiLCJkZWZhdWx0X3BsYW4iOiJldHN5X3BsYW5fMF9tb250aF8wIiwicGxhbl90eXBlIjoiUHJvIiwicGxhbl9wcmljZSI6eyJpZCI6IjI2OSIsInBsYW5faWQiOiIyNTEiLCJuYW1lIjoiRVRTWS1Qcm8tMTkuOTlVU0QtTW9udGgiLCJ0aXRsZSI6IiIsImNvZGUiOiJldHN5X3BsYW5fM19tb250aF8xOV85OSIsInByaWNlIjoiMTkuOTkiLCJjdXJyZW5jeV90eXBlIjoiMCIsImludGVydmFsIjoiMiIsImludGVydmFsX2NvdW50IjoiMSIsInN0YXR1cyI6IjEiLCJwYXJlbnRfaWQiOiIwIiwiaXNfcmVjdXJseSI6IjEiLCJ0aGVtZV9pbmZvIjoie1widHJpYWxfZGF5c1wiOlwiMVwiLFwidHJpYWxfYW1vdW50XCI6XCIxXCIsXCJjbnlfdHJpYWxfYW1vdW50XCI6XCI2LjVcIixcImJ0bl9ldmVudF90eXBlXCI6XCIxXCIsXCJjb250ZW50X2xpc3RfY29sb3JcIjpcIiNmMTcwM2ZcIixcInByaWNlX3RleHRcIjpcIjE5Ljk5XCIsXCJwcmljZV90ZXh0XzFcIjpcIjE5Ljk5XCIsXCJ0aW1lX3RleHRcIjpcIlxcdTY3MDhcIixcInRpbWVfdGV4dF8xXCI6XCJtb1wiLFwiZGVmYXVsdF9pY29uXCI6XCJlbC1pY29uLXN1Y2Nlc3NcIixcImNvbnRlbnRfbGlzdFwiOlwiXFx1OTAwOVxcdTU0YzFcXHU2NDFjXFx1N2QyMlxcdWZmMWFcXHU0ZTBkXFx1OTY1MFxcblxcdTU1NDZcXHU1NGMxXFx1NTNjYVxcdTVlOTdcXHU5NGZhXFx1Njk5Y1xcdTUzNTVcXHVmZjFhXFx1NTE2OFxcdTkwZThcXHU1YzU1XFx1NzkzYVxcblxcdTVlOTdcXHU5NGZhXFx1NjQxY1xcdTdkMjJcXHVmZjFhXFx1NGUwZFxcdTk2NTBcXG5cXHU1ZTk3XFx1OTRmYVxcdTUyMDZcXHU2NzkwXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTE3M1xcdTk1MmVcXHU4YmNkXFx1NTIwNlxcdTY3OTBcXHVmZjFhXFx1NmJjZlxcdTY1ZTUyMDBcXHU2YjIxXFxuXFx1NjUzNlxcdTg1Y2ZcXHU1MjlmXFx1ODBmZFxcdWZmMWFcXHU2NzAwXFx1NTkxYTI1MDBcXHU0ZTJhXFxuTGlzdGluZ1xcdTRmMThcXHU1MzE2XFx1ZmYxYVxcdTZiY2ZcXHU1OTI5MTAwXFx1NmIyMVxcblxcdTdkMjJcXHU4YmM0XFx1NTI5ZlxcdTgwZmRcXHVmZjFhXFx1NmJjZlxcdTY1ZTU1MDBcXHU2YjIxXFxuXFx1NGU5YVxcdTlhNmNcXHU5MDBhXFx1NjI0YlxcdTVkZTVcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NGUwYlxcdTY3YjZcXHU1NTQ2XFx1NTRjMVxcdTkwMDlcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTkxYVxcdTVlOTdcXHU5NGZhXFx1N2VkMVxcdTViOWFcXHVmZjFhMTBcXHU0ZTJhXFx1NWU5N1xcdTk0ZmFcIixcImNvbnRlbnRfbGlzdF8xXCI6XCJQcm9kdWN0IFNlYXJjaDogVW5saW1pdGVkXFxuUHJvZHVjdCBDaGFydDogVW5saW1pdGVkXFxuU2hvcCBTZWFyY2g6IFVubGltaXRlZFxcblNob3AgQW5hbHlzaXM6IFVubGltaXRlZFxcblNob3AgQ2hhcnQ6IFVubGltaXRlZFxcbktleXdvcmQgU2VhcmNoOiAyMDAgRGFpbHlcXG5GYXZvcml0ZXM6IFVwIHRvIDI1MDBcXG5MaXN0aW5nT3B0aW1pemU6IDEwMCBEYWlseVxcbkZvbGxvd3VwUmVtaW5kOiA1MDAgRGFpbHlcXG5BbWF6b24gSGFuZG1hZGU6IFVubGltaXRlZFxcbkluYWN0aXZlIFByb2R1Y3RzOiBVbmxpbWl0ZWRcXG5NdWx0aS1TdG9yZSBCaW5kaW5nOiAxMCBzaG9wc1wiLFwicGxhbl9jdXN0b21fc3R5bGVcIjp7XCJhY3RpdmVcIjpcImZhbHNlXCIsXCJub3JtYWxfYnRuX3RleHRfY29sb3JcIjpcIiNGRkZcIixcIm5vcm1hbF9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcIm5vcm1hbF9ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIixcImhvdmVyX2J0bl90ZXh0X2NvbG9yXCI6XCIjRkZGXCIsXCJob3Zlcl9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcImhvdmVyX2JvcmRlcl9jb2xvclwiOlwiI2ViZWJlYlwiLFwiaG92ZXJfc2NhbGVcIjpcIjEwXCIsXCJ1c2luZ19idG5fdGV4dF9jb2xvclwiOlwiI0ZGRlwiLFwidXNpbmdfYnRuX2JnX2NvbG9yXCI6XCIjZjE3MDNmXCIsXCJ1c2luZ19ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIn0sXCJ0aGVtZV9zdHlsZVwiOlwiMVwiLFwiY29udGVudF9saXN0X3N0eWxlXCI6XCIyXCIsXCJkZWZhdWx0X2ljb25fY29sb3JcIjpcIiNmMTcwM2ZcIixcInllYXJfc2F2ZV9wcmljZVwiOlwiXCIsXCJpc190cmlhbFwiOjAsXCJ0aXRsZV8xXCI6XCJQcm9cIixcInByaWNlXCI6XCIxOS45OVwiLFwic3ViX3RpdGxlXzFcIjpcIkFkdmFuY2VkIHNlbGVjdGlvblxcbkhlbHBpbmcgbXVsdGktc3RvcmUgc2VsbGVyXFxuXCIsXCJzdWJfdGl0bGVcIjpcIlxcdTU5MWFcXHU1ZTk3XFx1OTRmYVxcXC9cXHU5NGZhXFx1OGQyN1xcdTUzNTZcXHU1YmI2XFx1NWZjNVxcdTkwMDlcXG5cXHU5YWQ4XFx1OTYzNlxcdTkwMDlcXHU1NGMxXFx1NTI5ZlxcdTgwZmRcXHU1MmE5XFx1NjBhOFxcdTU5MjdcXHU1MzU2XCIsXCJ0aXRsZVwiOlwiUHJvXCIsXCJidG5fbmFtZVwiOlwiXFx1N2FjYlxcdTUzNzNcXHU4YmEyXFx1OTYwNVwiLFwiYnRuX25hbWVfMVwiOlwiR0VUXCIsXCJwcmljZV9kZXNcIjpcIlwifSIsImxldmVsIjoiMCIsImlzX2RlZmF1bHRfcGxhbiI6IjAiLCJ0eXBlIjoiMCIsImlzX2RlbGV0ZWQiOiIwIiwiY3JlYXRlZF9hdCI6IjIwMjItMDQtMjggMDE6MTc6NTEiLCJ1cGRhdGVkX2F0IjoiMjAyMi0wOS0yOSAwNzoyMzowOCJ9fX0.c31xnjudxM_me0BB2o8y5K8OX8StkPPBXkN8C_BcSbU"
+    result = []
+    
+    for link in links:
+ 
+        url_ = link.link
+        context = {}
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYW4iOiJlbiIsInZlciI6InNtYiIsInRpbWVzdGFtcCI6MTY3NTc5MjY4MiwiZXhwaXJlIjoxNjc2MDUxODgyLCJ1c2VyX2lkIjoiUzFKblJsaFVhZz09IiwiYXBwbmFtZSI6IkV0c3lIdW50Iiwic3Vic2NyaXB0aW9uIjp7ImlkIjoiMTgyMjcxIiwicGxhbl9pZCI6IjI1MSIsInBsYW5fcHJpY2VfaWQiOiIyNjkiLCJ1c2VyX2lkIjoiMTQ4MzEwNSIsImNoYW5uZWwiOiIwIiwiY2hhbm5lbF9jdXN0X2lkIjoiY3VzX01idmJpY3RKd2hXWVA3IiwiY2hhbm5lbF9zdWJzY3JpcHRpb25fb3Jfb3JkZXJfaWQiOiJzdWJfMUxzaGttSmMxSWFobTJFOVdBZ3U4dGlnIiwiY2hhbm5lbF9zdGF0dXMiOiJhY3RpdmUiLCJjaGFubmVsX2xhc3RfcGF5bWVudF9kYXRlIjoiMCIsImNoYW5uZWxfbGFzdF9wYXltZW50X2Ftb3VudCI6IjAiLCJjaGFubmVsX3N0YXJ0X2F0IjoiMTY3MzY3OTE0MCIsImNoYW5uZWxfY2FuY2VsZWRfYXQiOiIwIiwiY2hhbm5lbF9lbmRfYXQiOiIwIiwicGVyaW9kX3N0YXJ0IjoiMTY2NTczMDM0MCIsInBlcmlvZF9lbmQiOiIxNjc2MzU3NTQwIiwicGVyaW9kX2RlbGF5IjoiMCIsImlzX3RyaWFsIjoiMCIsInNjYWxhIjpudWxsLCJsYXN0X3N5bmMiOiIxNjc1Nzg3MzE2IiwiY3JlYXRlZF9hdCI6IjIwMjItMTAtMTMgMjM6NTI6MTkiLCJsYXN0X21vZGlmaWVkIjoiMjAyMy0wMi0wNyAwODoyODozNiIsImNhbmNlbGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsImVuZGVkX2F0IjoiMDAwMC0wMC0wMCAwMDowMDowMCIsInN0YXR1cyI6IjEiLCJjb3VudHJ5X2NvZGUiOiIwIiwicGF5X3R5cGUiOiIwIiwicHJlX3N1YnNjcmlwdGlvbl9pZCI6IjAiLCJjb2RlIjoiZXRzeV9wbGFuXzNfbW9udGhfMTlfOTkiLCJwbGFuX25hbWUiOiJFdHN5SHVudCBQcm8iLCJpc19yZWN1cmx5IjoiMSIsInByaWNlIjoiMTkuOTkiLCJkZWZhdWx0X3BsYW4iOiJldHN5X3BsYW5fMF9tb250aF8wIiwicGxhbl90eXBlIjoiUHJvIiwicGxhbl9wcmljZSI6eyJpZCI6IjI2OSIsInBsYW5faWQiOiIyNTEiLCJuYW1lIjoiRVRTWS1Qcm8tMTkuOTlVU0QtTW9udGgiLCJ0aXRsZSI6IiIsImNvZGUiOiJldHN5X3BsYW5fM19tb250aF8xOV85OSIsInByaWNlIjoiMTkuOTkiLCJjdXJyZW5jeV90eXBlIjoiMCIsImludGVydmFsIjoiMiIsImludGVydmFsX2NvdW50IjoiMSIsInN0YXR1cyI6IjEiLCJwYXJlbnRfaWQiOiIwIiwiaXNfcmVjdXJseSI6IjEiLCJ0aGVtZV9pbmZvIjoie1widHJpYWxfZGF5c1wiOlwiMVwiLFwidHJpYWxfYW1vdW50XCI6XCIxXCIsXCJjbnlfdHJpYWxfYW1vdW50XCI6XCI2LjVcIixcImJ0bl9ldmVudF90eXBlXCI6XCIxXCIsXCJjb250ZW50X2xpc3RfY29sb3JcIjpcIiNmMTcwM2ZcIixcInByaWNlX3RleHRcIjpcIjE5Ljk5XCIsXCJwcmljZV90ZXh0XzFcIjpcIjE5Ljk5XCIsXCJ0aW1lX3RleHRcIjpcIlxcdTY3MDhcIixcInRpbWVfdGV4dF8xXCI6XCJtb1wiLFwiZGVmYXVsdF9pY29uXCI6XCJlbC1pY29uLXN1Y2Nlc3NcIixcImNvbnRlbnRfbGlzdFwiOlwiXFx1OTAwOVxcdTU0YzFcXHU2NDFjXFx1N2QyMlxcdWZmMWFcXHU0ZTBkXFx1OTY1MFxcblxcdTU1NDZcXHU1NGMxXFx1NTNjYVxcdTVlOTdcXHU5NGZhXFx1Njk5Y1xcdTUzNTVcXHVmZjFhXFx1NTE2OFxcdTkwZThcXHU1YzU1XFx1NzkzYVxcblxcdTVlOTdcXHU5NGZhXFx1NjQxY1xcdTdkMjJcXHVmZjFhXFx1NGUwZFxcdTk2NTBcXG5cXHU1ZTk3XFx1OTRmYVxcdTUyMDZcXHU2NzkwXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTE3M1xcdTk1MmVcXHU4YmNkXFx1NTIwNlxcdTY3OTBcXHVmZjFhXFx1NmJjZlxcdTY1ZTUyMDBcXHU2YjIxXFxuXFx1NjUzNlxcdTg1Y2ZcXHU1MjlmXFx1ODBmZFxcdWZmMWFcXHU2NzAwXFx1NTkxYTI1MDBcXHU0ZTJhXFxuTGlzdGluZ1xcdTRmMThcXHU1MzE2XFx1ZmYxYVxcdTZiY2ZcXHU1OTI5MTAwXFx1NmIyMVxcblxcdTdkMjJcXHU4YmM0XFx1NTI5ZlxcdTgwZmRcXHVmZjFhXFx1NmJjZlxcdTY1ZTU1MDBcXHU2YjIxXFxuXFx1NGU5YVxcdTlhNmNcXHU5MDBhXFx1NjI0YlxcdTVkZTVcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NGUwYlxcdTY3YjZcXHU1NTQ2XFx1NTRjMVxcdTkwMDlcXHU1NGMxXFx1ZmYxYVxcdTRlMGRcXHU5NjUwXFxuXFx1NTkxYVxcdTVlOTdcXHU5NGZhXFx1N2VkMVxcdTViOWFcXHVmZjFhMTBcXHU0ZTJhXFx1NWU5N1xcdTk0ZmFcIixcImNvbnRlbnRfbGlzdF8xXCI6XCJQcm9kdWN0IFNlYXJjaDogVW5saW1pdGVkXFxuUHJvZHVjdCBDaGFydDogVW5saW1pdGVkXFxuU2hvcCBTZWFyY2g6IFVubGltaXRlZFxcblNob3AgQW5hbHlzaXM6IFVubGltaXRlZFxcblNob3AgQ2hhcnQ6IFVubGltaXRlZFxcbktleXdvcmQgU2VhcmNoOiAyMDAgRGFpbHlcXG5GYXZvcml0ZXM6IFVwIHRvIDI1MDBcXG5MaXN0aW5nT3B0aW1pemU6IDEwMCBEYWlseVxcbkZvbGxvd3VwUmVtaW5kOiA1MDAgRGFpbHlcXG5BbWF6b24gSGFuZG1hZGU6IFVubGltaXRlZFxcbkluYWN0aXZlIFByb2R1Y3RzOiBVbmxpbWl0ZWRcXG5NdWx0aS1TdG9yZSBCaW5kaW5nOiAxMCBzaG9wc1wiLFwicGxhbl9jdXN0b21fc3R5bGVcIjp7XCJhY3RpdmVcIjpcImZhbHNlXCIsXCJub3JtYWxfYnRuX3RleHRfY29sb3JcIjpcIiNGRkZcIixcIm5vcm1hbF9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcIm5vcm1hbF9ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIixcImhvdmVyX2J0bl90ZXh0X2NvbG9yXCI6XCIjRkZGXCIsXCJob3Zlcl9idG5fYmdfY29sb3JcIjpcIiNmMTcwM2ZcIixcImhvdmVyX2JvcmRlcl9jb2xvclwiOlwiI2ViZWJlYlwiLFwiaG92ZXJfc2NhbGVcIjpcIjEwXCIsXCJ1c2luZ19idG5fdGV4dF9jb2xvclwiOlwiI0ZGRlwiLFwidXNpbmdfYnRuX2JnX2NvbG9yXCI6XCIjZjE3MDNmXCIsXCJ1c2luZ19ib3JkZXJfY29sb3JcIjpcIiNlYmViZWJcIn0sXCJ0aGVtZV9zdHlsZVwiOlwiMVwiLFwiY29udGVudF9saXN0X3N0eWxlXCI6XCIyXCIsXCJkZWZhdWx0X2ljb25fY29sb3JcIjpcIiNmMTcwM2ZcIixcInllYXJfc2F2ZV9wcmljZVwiOlwiXCIsXCJpc190cmlhbFwiOjAsXCJ0aXRsZV8xXCI6XCJQcm9cIixcInByaWNlXCI6XCIxOS45OVwiLFwic3ViX3RpdGxlXzFcIjpcIkFkdmFuY2VkIHNlbGVjdGlvblxcbkhlbHBpbmcgbXVsdGktc3RvcmUgc2VsbGVyXFxuXCIsXCJzdWJfdGl0bGVcIjpcIlxcdTU5MWFcXHU1ZTk3XFx1OTRmYVxcXC9cXHU5NGZhXFx1OGQyN1xcdTUzNTZcXHU1YmI2XFx1NWZjNVxcdTkwMDlcXG5cXHU5YWQ4XFx1OTYzNlxcdTkwMDlcXHU1NGMxXFx1NTI5ZlxcdTgwZmRcXHU1MmE5XFx1NjBhOFxcdTU5MjdcXHU1MzU2XCIsXCJ0aXRsZVwiOlwiUHJvXCIsXCJidG5fbmFtZVwiOlwiXFx1N2FjYlxcdTUzNzNcXHU4YmEyXFx1OTYwNVwiLFwiYnRuX25hbWVfMVwiOlwiR0VUXCIsXCJwcmljZV9kZXNcIjpcIlwifSIsImxldmVsIjoiMCIsImlzX2RlZmF1bHRfcGxhbiI6IjAiLCJ0eXBlIjoiMCIsImlzX2RlbGV0ZWQiOiIwIiwiY3JlYXRlZF9hdCI6IjIwMjItMDQtMjggMDE6MTc6NTEiLCJ1cGRhdGVkX2F0IjoiMjAyMi0wOS0yOSAwNzoyMzowOCJ9fX0.c31xnjudxM_me0BB2o8y5K8OX8StkPPBXkN8C_BcSbU"
+
+        response_ = requests.get(url_)
+
+        soup = BeautifulSoup(response_.text, 'html.parser')
+        tree = html.fromstring(response_.content)
+
+        dispatch_country = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[8]/text()')
+        order_place = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[1]/div/p/text()')
+        order_dispatch = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/p/text()')
+        order_delivery = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[3]/div/p/text()')
+        title = tree.xpath('//*[@id="listing-page-cart"]/div[2]/h1/text()')
+
+        url_ = url_[29:]
+        end_index = url_.find('/')
+        product_id=url_[:end_index]
+
+
+
+        url = "https://etsyhunt.com/ecommerce/store/v1_0/detail?product_id={}".format(product_id)
+        url1 = "https://etsyhunt.com/ecommerce/product/v1_0/detail?product_id={}".format(product_id)
+
+
+        headers = {
+            "authorization": token
+        }
+        response = requests.get( url, headers=headers).json()
+        response1 = requests.get( url1, headers=headers).json()
+        category_list = "".join(response1['data']['categories'])
+
+
+        context['listing_id'] = product_id
+        context['listing_link'] = link.link
+        context['category_list'] = category_list
+
+
+        listed_time     = response1['data']['listed_time']
+        description     = response1['data']['description']
+        price           = response1['data']['price']
+        sales_total     = response1['data']['sales_total']
+        tags            = response1['data']['tags']
+        reviews         = response1['data']['reviews']
+
+        # store details
+        store_id        = response['data']['store_id']
+        store_name      = response['data']['store_name']
+        store_products  = response['data']['store_products']
+        store_rating    = response['data']['store_rating']
+        store_reviews   = response['data']['store_reviews']
+        store_sales     = response['data']['store_sales']
+
+
+        context['title'] = title[0].strip().replace("\n", "")
+        context['price'] = price
+        context['tags'] = tags
+        context['description'] = description
+        context['listed_time'] = listed_time
+        context['sales_total'] = sales_total
+        context['reviews'] = reviews
+        context['store_id'] = store_id
+        context['store_name'] = store_name
+        context['store_products'] = store_products
+        context['store_rating'] = store_rating
+        context['store_reviews'] = store_reviews
+        context['store_sales'] = store_sales
+        context['dispatch_country'] = dispatch_country[0].strip().replace("\n", "")
+        context['order_place'] = order_place
+        context['order_dispatch'] = order_dispatch
+        context['order_delivery'] = order_delivery
+        context['order_delivery'] = order_delivery
+        result.append(context)
+    return context

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import  permissions
-from .scraper import getShopsData
+from .scraper import getShopsData,getProductData
 from .models import *
 import pandas as pd
 import os
@@ -26,4 +26,15 @@ class get_api_data(APIView):
             return Response(output)
         # except:
         #     return Response({"message":"Error Occu
+
+class get_api_data_products(APIView):
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        # try:
+            links = ProductsLink.objects.filter()
+            output = getProductData(links)
+            return Response(output)
+        # except:
+        #     return Response({"message":"Error Occured"})
      

@@ -8,3 +8,4 @@ class CompetitorLinkAdmin(admin.ModelAdmin):
 
     
 admin.site.register(CompetitorLink,CompetitorLinkAdmin)
+admin.site.register(ProductsLink)
