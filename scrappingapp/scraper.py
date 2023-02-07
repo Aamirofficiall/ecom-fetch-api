@@ -237,6 +237,8 @@ def getProductData(links):
         }
         response = requests.get( url, headers=headers).json()
         response1 = requests.get( url1, headers=headers).json()
+        print(response)
+        print(response1)
         category_list = "".join(response1['data']['categories'])
 
 
