@@ -283,4 +283,4 @@ def getProductData(links):
         context['order_delivery'] = order_delivery
         context['order_delivery'] = order_delivery
         result.append(context)
-    return context
+    return result
