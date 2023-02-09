@@ -243,9 +243,7 @@ def getProductData(links):
         category_list = "".join(response1['data']['categories'])
 
 
-        context['listing_id'] = product_id
-        context['listing_link'] = link.link
-        context['category_list'] = category_list
+
 
 
         listed_time     = response1['data']['listed_time']
@@ -263,24 +261,28 @@ def getProductData(links):
         store_reviews   = response['data']['store_reviews']
         store_sales     = response['data']['store_sales']
 
-
-        context['title'] = title[0].strip().replace("\n", "")
-        context['price'] = price
-        context['tags'] = tags
-        context['description'] = description
-        context['listed_time'] = listed_time
-        context['sales_total'] = sales_total
-        context['reviews'] = reviews
-        context['store_id'] = store_id
+        context['store_link'] = "https://www.etsy.com/shop/" + store_name
         context['store_name'] = store_name
         context['store_products'] = store_products
         context['store_rating'] = store_rating
-        context['store_reviews'] = store_reviews
         context['store_sales'] = store_sales
-        context['dispatch_country'] = dispatch_country[0].strip().replace("\n", "")
-        context['order_place'] = order_place
+        context['listing_link'] = link.link
+        context['listing_id'] = product_id
+        
+        context['title'] = title[0].strip().replace("\n", "")
+        context['category_list'] = category_list
         context['order_dispatch'] = order_dispatch
+        context['dispatch_country'] = dispatch_country[0].strip().replace("\n", "")
         context['order_delivery'] = order_delivery
-        context['order_delivery'] = order_delivery
+        
+        context['price'] = price
+        context['listed_time'] = listed_time
+        context['reviews'] = reviews
+        context['sales_total'] = sales_total
+        context['tags'] = ",".join(tags)
+        
+        context['store_id'] = store_id
+        context['store_reviews'] = store_reviews
+        context['order_place'] = order_place
         result.append(context)
     return result
