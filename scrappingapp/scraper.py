@@ -221,6 +221,7 @@ def getProductData(links):
         tree = html.fromstring(response_.content)
 
         dispatch_country = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[8]/text()')
+        dispatch_country1 = tree.xpath('/html/body/main/div[1]/div[1]/div/div/div[1]/div[3]/div/div[3]/div/div/div/div[2]/div[9]/text()')
         order_place = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[1]/div/p/text()')
         order_dispatch = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/p/text()')
         order_delivery = tree.xpath('//*[@id="shipping-variant-div"]/div/div[2]/div[1]/div/div/div[2]/div[3]/div/p/text()')
