@@ -275,7 +275,11 @@ def getProductData(links):
         context['title'] = title[0].strip().replace("\n", "")
         context['category_list'] = category_list
         context['order_dispatch'] = order_dispatch
-        context['dispatch_country'] = dispatch_country[0].strip().replace("\n", "")
+        try:
+            context['dispatch_country'] = dispatch_country[0].strip().replace("\n", "")
+        except:
+            context['dispatch_country'] = ""
+            
         context['order_delivery'] = order_delivery
         
         context['price'] = price
